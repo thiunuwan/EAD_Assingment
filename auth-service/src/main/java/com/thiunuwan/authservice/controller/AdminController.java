@@ -1,4 +1,4 @@
-package com.thiunuwan.authservice.controllers;
+package com.thiunuwan.authservice.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
