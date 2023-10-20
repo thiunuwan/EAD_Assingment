@@ -8,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity
 @Table(name="roles")
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
