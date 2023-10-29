@@ -28,7 +28,7 @@ public class AuthServiceApplication {
 	CommandLineRunner run(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder){
 	return args ->{
 
-		if(roleRepository.findByAuthority("ADMIN").isPresent()) return;
+		if(roleRepository.findByAuthority("ADMIN").isPresent())return;
 
 		Role adminRole = roleRepository.save(new Role("ADMIN"))	;
 		Role userRole  = roleRepository.save(new Role("USER"));
