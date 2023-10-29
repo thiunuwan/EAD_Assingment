@@ -1,6 +1,7 @@
 package com.thiunuwan.authservice.controller;
 
 
+import com.thiunuwan.authservice.dto.LoginResponseDTO;
 import com.thiunuwan.authservice.dto.RegistrationDTO;
 import com.thiunuwan.authservice.entity.ApplicationUser;
 import com.thiunuwan.authservice.service.AuthenticationService;
@@ -21,6 +22,11 @@ public class AuthenticationController {
         System.out.println("r-controller");
         return authenticationService.registerUser(registrationDTO.getUsername(),registrationDTO.getPassword());
     }
+
+    @PostMapping("/login")
+    public LoginResponseDTO loginUser(@RequestBody RegistrationDTO loginUser){
+        return authenticationService.loginUser(loginUser.getUsername(), loginUser.getPassword());
+    }    //user login DTO
 
 
 }
