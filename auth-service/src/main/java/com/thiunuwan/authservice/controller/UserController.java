@@ -12,7 +12,6 @@ public class UserController {
 
     @GetMapping("/")
     public String helloUserController(){
-
      return  "user access level";
     }
 }
