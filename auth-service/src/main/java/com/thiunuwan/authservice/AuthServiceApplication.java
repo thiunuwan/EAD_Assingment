@@ -33,12 +33,15 @@ public class AuthServiceApplication {
 		Role adminRole = roleRepository.save(new Role("ADMIN"))	;
 		Role userRole  = roleRepository.save(new Role("USER"));
 		Role inventoryKeeperRole  = roleRepository.save(new Role("INVENTORY_KEEPER"));
+		Role deliveryPersonRole  = roleRepository.save(new Role("DElVERY_PERSON"));
+
+
 
 		Set<Role> roles = new HashSet<>();
 		roles.add(adminRole);
 		roles.add(userRole);
 		roles.add(inventoryKeeperRole);
-
+		roles.add(deliveryPersonRole);
 		ApplicationUser admin = new ApplicationUser(1,"admin", passwordEncoder.encode("admin123"),roles );
 		userRepository.save(admin);
 
