@@ -69,4 +69,15 @@ public class ProductService {
                 .build();
         return productResponseDTO;
     }
+
+    public String updateProduct(ProductRequestDTO productRequestDTO,int id) {
+        Product productEntity=productRepository.findById(id).orElse(null);
+        productEntity.setCategory(productRequestDTO.getCategory());
+        productEntity.setPrice(productRequestDTO.getPrice());
+        productEntity.setDescription(productRequestDTO.getDescription());
+        productEntity.setQuantity(productRequestDTO.getQuantity());
+        productEntity.setImageURL(productRequestDTO.getImageURL());
+        productRepository.save(productEntity);
+        return "Product is successfully updated";
+    }
 }

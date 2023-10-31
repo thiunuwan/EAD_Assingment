@@ -40,6 +40,11 @@ public class ProductController {
         return ResponseEntity.ok(result);
     }
 
+    @PutMapping("/update-product/{id}")
+    public ResponseEntity<String> updateProduct(@RequestBody ProductRequestDTO productRequestDTO,@PathVariable(name = "id") int id){
+        String result=productService.updateProduct(productRequestDTO,id);
+        return ResponseEntity.ok(result);
+    }
 
 
 }
