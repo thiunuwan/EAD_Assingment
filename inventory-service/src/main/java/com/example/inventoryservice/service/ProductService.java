@@ -80,4 +80,9 @@ public class ProductService {
         productRepository.save(productEntity);
         return "Product is successfully updated";
     }
+
+    public String deleteProduct(int id) {
+        productRepository.deleteById(id);
+        return "product is successfully deleted";
+    }
 }
