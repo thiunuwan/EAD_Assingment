@@ -56,4 +56,17 @@ public class ProductService {
                                                                 .build();
         return productResponseDTO;
     }
+
+    public ProductResponseDTO getProductById(int id) {
+        Product productEntity= productRepository.findById(id).orElse(null);
+        ProductResponseDTO productResponseDTO=ProductResponseDTO.builder()
+                .category(productEntity.getCategory())
+                .quantity(productEntity.getQuantity())
+                .price(productEntity.getPrice())
+                .description(productEntity.getDescription())
+                .imageURL(productEntity.getImageURL())
+                .id(productEntity.getId())
+                .build();
+        return productResponseDTO;
+    }
 }
