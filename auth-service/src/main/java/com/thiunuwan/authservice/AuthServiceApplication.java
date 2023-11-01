@@ -30,19 +30,19 @@ public class AuthServiceApplication {
 
 		if(roleRepository.findByAuthority("ADMIN").isPresent())return;
 
-		Role adminRole = roleRepository.save(new Role("ADMIN"))	;
-		Role userRole  = roleRepository.save(new Role("USER"));
-		Role inventoryKeeperRole  = roleRepository.save(new Role("INVENTORY_KEEPER"));
-		Role deliveryPersonRole  = roleRepository.save(new Role("DElVERY_PERSON"));
+		roleRepository.save(new Role("ADMIN"));
+		roleRepository.save(new Role("USER"));
+		roleRepository.save(new Role("INVENTORY_KEEPER"));
+		roleRepository.save(new Role("DElVERY_PERSON"));
 
 
 
-		Set<Role> roles = new HashSet<>();
-		roles.add(adminRole);
-		roles.add(userRole);
-		roles.add(inventoryKeeperRole);
-		roles.add(deliveryPersonRole);
-		ApplicationUser admin = new ApplicationUser(1,"admin", passwordEncoder.encode("admin123"),roles );
+		Set<Role> authorities = new HashSet<>();
+		authorities.add(roleRepository.findByAuthority("ADMIN").get());
+		authorities.add(roleRepository.findByAuthority("USER").get());
+		authorities.add(roleRepository.findByAuthority("INVENTORY_KEEPER").get());
+		authorities.add(roleRepository.findByAuthority("DElVERY_PERSON").get());
+		ApplicationUser admin = new ApplicationUser(null,"thiunuwan", passwordEncoder.encode("rtv"),authorities);
 		userRepository.save(admin);
 
 	};
