@@ -1,9 +1,7 @@
 package com.example.inventoryservice.dto;
 
-
 import lombok.*;
 import org.springframework.stereotype.Component;
-
 
 
 @Data
@@ -13,10 +11,12 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @Builder
 @Component
-public class ProductRequestDTO {
+public class ItemResponseDTO {
+    private int itemId;
+    private String itemName;
     private String category;
     private String description;
     private String imageURL;
-    private int quantity;
-    private double price;
+    private int availableQuantity;
+    private double unitPrice;
 }

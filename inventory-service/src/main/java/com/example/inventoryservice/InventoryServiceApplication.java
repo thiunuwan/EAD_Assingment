@@ -1,7 +1,7 @@
 package com.example.inventoryservice;
 
-import com.example.inventoryservice.entity.Product;
-import com.example.inventoryservice.repository.ProductRepository;
+import com.example.inventoryservice.entity.InventoryItem;
+import com.example.inventoryservice.repository.ItemRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,16 +16,16 @@ public class InventoryServiceApplication {
 
 	}
 
-	//add defaults products to inventory_db
+	//add defaults items to inventory_db
 	@Bean
-	CommandLineRunner run(ProductRepository productRepository){
+	CommandLineRunner run(ItemRepository itemRepository){
 		return args ->{
 
-			if(productRepository.existsById(1))return;
+			if(itemRepository.existsById(1))return;
 
-			productRepository.save(new Product(1,  "Biscuits", "Classic Oreo sandwich cookies", "https://example.com/oreo.jpg", 60, 7.4));
-			productRepository.save(new Product(5, "Biscuits", "Buttery shortbread cookies", "https://example.com/shortbread.jpg", 35, 3.49));
-			productRepository.save(new Product(10, "Biscuits", "Spicy ginger snap cookies", "https://example.com/ginger.jpg", 45, 2.99));
+			itemRepository.save(new InventoryItem(1,  "tikiri mari","Biscuits", "Classic Oreo sandwich cookies", "https://example.com/oreo.jpg", 60, 7.4));
+			itemRepository.save(new InventoryItem(5, "cheese-bits","Biscuits", "Buttery shortbread cookies", "https://example.com/shortbread.jpg", 35, 3.49));
+			itemRepository.save(new InventoryItem(10, "cream cracker","Biscuits", "Spicy ginger snap cookies", "https://example.com/ginger.jpg", 45, 2.99));
 
 
 		};
