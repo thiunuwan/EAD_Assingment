@@ -1,9 +1,6 @@
 package com.example.inventoryservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Data
@@ -19,10 +16,14 @@ public class InventoryItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int itemId;
     private String itemName;
-    private String category;
     private String description;
     private String imageURL;
     private int availableQuantity;
     private double unitPrice;
     private  Unit unit;
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "category-id")
+    private Category category;
+
 }

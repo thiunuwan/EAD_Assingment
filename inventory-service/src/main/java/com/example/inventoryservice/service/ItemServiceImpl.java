@@ -3,7 +3,9 @@ package com.example.inventoryservice.service;
 
 import com.example.inventoryservice.dto.ItemRequestDTO;
 import com.example.inventoryservice.dto.ItemResponseDTO;
+import com.example.inventoryservice.entity.Category;
 import com.example.inventoryservice.entity.InventoryItem;
+import com.example.inventoryservice.repository.CategoryRepository;
 import com.example.inventoryservice.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,10 +21,16 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
     public String addNewItem(ItemRequestDTO itemRequestDTO) {
+
+        Category category=categoryRepository.findById(itemRequestDTO.getCategory().getCategoryId()).orElse(null);
+
         InventoryItem newInventoryItem = InventoryItem.builder()
                 .itemName(itemRequestDTO.getItemName())
-                .category(itemRequestDTO.getCategory())
+                .category(category)
                 .description(itemRequestDTO.getDescription())
                 .unitPrice(itemRequestDTO.getUnitPrice())
                 .imageURL(itemRequestDTO.getImageURL())

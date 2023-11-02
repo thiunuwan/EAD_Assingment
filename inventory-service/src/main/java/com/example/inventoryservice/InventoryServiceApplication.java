@@ -1,5 +1,6 @@
 package com.example.inventoryservice;
 
+import com.example.inventoryservice.entity.Category;
 import com.example.inventoryservice.entity.InventoryItem;
 import com.example.inventoryservice.entity.Unit;
 import com.example.inventoryservice.repository.ItemRepository;
@@ -24,9 +25,13 @@ public class InventoryServiceApplication {
 
 			if(itemRepository.existsById(1))return;
 
-			itemRepository.save(new InventoryItem(1,  "tikiri mari","Biscuits", "Classic Oreo sandwich cookies", "https://example.com/oreo.jpg", 60, 7.4, Unit.EACH));
-			itemRepository.save(new InventoryItem(5, "cheese-bits","Biscuits", "Buttery shortbread cookies", "https://example.com/shortbread.jpg", 35, 3.49,Unit.EACH));
-			itemRepository.save(new InventoryItem(10, "cream cracker","Biscuits", "Spicy ginger snap cookies", "https://example.com/ginger.jpg", 45, 2.99,Unit.EACH));
+			Category category1=new Category();
+			category1.setName("electronic");
+			category1.setDescription("Biscuits");
+
+			itemRepository.save(new InventoryItem(1,  "tikiri mari","Biscuits", "https://example.com/oreo.jpg", 60, 7.4, Unit.EACH,category1));
+			itemRepository.save(new InventoryItem(5, "cheese-bits","Biscuits", "https://example.com/shortbread.jpg", 35, 3.49,Unit.EACH,category1));
+			itemRepository.save(new InventoryItem(10, "cream cracker","Biscuits",  "https://example.com/ginger.jpg", 45, 2.99,Unit.EACH,category1));
 
 
 		};
