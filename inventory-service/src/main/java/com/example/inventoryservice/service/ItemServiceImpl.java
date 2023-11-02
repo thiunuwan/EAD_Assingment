@@ -26,7 +26,7 @@ public class ItemServiceImpl implements ItemService {
     private CategoryRepository categoryRepository;
     public String addNewItem(ItemRequestDTO itemRequestDTO) {
 
-        Category category=categoryRepository.findById(itemRequestDTO.getCategory().getCategoryId()).orElse(null);
+        Category category=categoryRepository.findById(itemRequestDTO.getCategoryId()).orElse(null);
 
         InventoryItem newInventoryItem = InventoryItem.builder()
                 .itemName(itemRequestDTO.getItemName())
@@ -35,6 +35,7 @@ public class ItemServiceImpl implements ItemService {
                 .unitPrice(itemRequestDTO.getUnitPrice())
                 .imageURL(itemRequestDTO.getImageURL())
                 .availableQuantity(itemRequestDTO.getAvailableQuantity())
+                .unit(itemRequestDTO.getUnit())
                 .build();
         itemRepository.save(newInventoryItem);
         return  "Product is successfully added to the inventory";
@@ -75,14 +76,18 @@ public class ItemServiceImpl implements ItemService {
                 .description(inventoryItemEntity.getDescription())
                 .imageURL(inventoryItemEntity.getImageURL())
                 .itemId(inventoryItemEntity.getItemId())
+                .unit(inventoryItemEntity.getUnit())
                 .build();
         return itemResponseDTO;
     }
 
     public String updateItem(ItemRequestDTO itemRequestDTO, int id) {
+
+        Category category=categoryRepository.findById(itemRequestDTO.getCategoryId()).orElse(null);
+
         InventoryItem inventoryItemEntity = itemRepository.findById(id).orElse(null);
         inventoryItemEntity.setItemName(itemRequestDTO.getItemName());
-        inventoryItemEntity.setCategory(itemRequestDTO.getCategory());
+        inventoryItemEntity.setCategory(category);
         inventoryItemEntity.setUnitPrice(itemRequestDTO.getUnitPrice());
         inventoryItemEntity.setDescription(itemRequestDTO.getDescription());
         inventoryItemEntity.setAvailableQuantity(itemRequestDTO.getAvailableQuantity());

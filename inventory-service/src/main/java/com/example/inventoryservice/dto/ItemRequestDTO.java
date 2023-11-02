@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ItemRequestDTO {
     private String itemName;
-    private Category category;
+    private int categoryId;
     private String description;
     private String imageURL;
     private int availableQuantity;
