@@ -20,6 +20,7 @@ public class InventoryItem {
     private String imageURL;
     private int availableQuantity;
     private double unitPrice;
+    @Enumerated(EnumType.STRING)
     private  Unit unit;
 
     @ManyToOne(cascade=CascadeType.ALL)
