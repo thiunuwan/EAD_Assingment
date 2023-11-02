@@ -24,4 +24,5 @@ public class InventoryItem {
     private String imageURL;
     private int availableQuantity;
     private double unitPrice;
+    private  Unit unit;
 }
