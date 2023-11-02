@@ -1,5 +1,6 @@
 package com.example.inventoryservice.dto;
 
+import com.example.inventoryservice.entity.Unit;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -19,4 +20,5 @@ public class ItemResponseDTO {
     private String imageURL;
     private int availableQuantity;
     private double unitPrice;
+    private Unit unit;
 }
