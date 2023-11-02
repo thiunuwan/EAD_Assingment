@@ -2,7 +2,7 @@ package com.example.inventoryservice.controller;
 
 import com.example.inventoryservice.dto.ItemRequestDTO;
 import com.example.inventoryservice.dto.ItemResponseDTO;
-import com.example.inventoryservice.service.ItemService;
+import com.example.inventoryservice.service.ItemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.*;
 public class ItemController {
 
     @Autowired
-    private ItemService itemService;
+    private ItemServiceImpl itemServiceImpl;
     @PostMapping("/add-item")
     public ResponseEntity<String> addItem(@RequestBody ItemRequestDTO itemRequestDTO){
-        String result= itemService.addNewItem(itemRequestDTO);
+        String result= itemServiceImpl.addNewItem(itemRequestDTO);
         return ResponseEntity.ok(result);
     }
 
@@ -30,25 +30,25 @@ public class ItemController {
 
         ResponseEntity<Page<ItemResponseDTO>> responseEntity = null;
 
-        Page<ItemResponseDTO> pageDTOs = itemService.getAllItems(page, size);
+        Page<ItemResponseDTO> pageDTOs = itemServiceImpl.getAllItems(page, size);
         return responseEntity.ok(pageDTOs);
     }
 
     @GetMapping("/get-item/{id}")
     public ResponseEntity<ItemResponseDTO> getItemById(@PathVariable(name = "id") int id){
-        ItemResponseDTO result= itemService.getItemById(id);
+        ItemResponseDTO result= itemServiceImpl.getItemById(id);
         return ResponseEntity.ok(result);
     }
 
     @PutMapping("/update-item/{id}")
     public ResponseEntity<String> updateItem(@RequestBody ItemRequestDTO itemRequestDTO, @PathVariable(name = "id") int id){
-        String result= itemService.updateItem(itemRequestDTO,id);
+        String result= itemServiceImpl.updateItem(itemRequestDTO,id);
         return ResponseEntity.ok(result);
     }
 
     @DeleteMapping("delete-product/{id}")
     public ResponseEntity<String> deleteItem(@PathVariable(name = "id") int id){
-        String result= itemService.deleteItem(id);
+        String result= itemServiceImpl.deleteItem(id);
         return ResponseEntity.ok(result);
     }
 
