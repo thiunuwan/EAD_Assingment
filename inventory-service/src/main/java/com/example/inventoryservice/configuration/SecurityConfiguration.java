@@ -1,12 +1,13 @@
-package com.thiunuwan.authservice.configuration;
+package com.example.inventoryservice.configuration;
 
+
+import com.example.inventoryservice.utils.RSAKeyProperties;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.thiunuwan.authservice.utils.RSAKeyProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,8 +25,6 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
-
-
 
 @Configuration
 public class SecurityConfiguration {
@@ -53,10 +52,8 @@ public class SecurityConfiguration {
            http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/api/v1/auth/login").permitAll();
-                    auth.requestMatchers("/api/v1/auth/register").permitAll();
-                    auth.requestMatchers("/api/v1/auth/admin/**").hasRole("ADMIN");
-                    auth.requestMatchers("/api/v1/auth/user/**").hasAnyRole("ADMIN","USER");
+                    auth.requestMatchers("/api/v1/inventory/**").permitAll();
+                    auth.requestMatchers("/api/v1/category/**").hasRole("ADMIN");
                     auth.anyRequest().authenticated();
                 });
 

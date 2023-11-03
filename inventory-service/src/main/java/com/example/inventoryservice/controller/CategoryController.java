@@ -21,13 +21,13 @@ public class CategoryController {
         return ResponseEntity.ok(result);
     }
 
-    @DeleteMapping("delete-category/{id}")
+    @DeleteMapping("/delete-category/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable(name = "id") int id){
         String result= categoryService.deleteCategory(id);
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("get-categories")
+    @GetMapping("/get-categories")
     public ResponseEntity<List<CategoryResponseDTO>> getAllCategories(){
         List<CategoryResponseDTO> categoryResponseDTOList=categoryService.getAllCategories();
         return ResponseEntity.ok(categoryResponseDTOList);
