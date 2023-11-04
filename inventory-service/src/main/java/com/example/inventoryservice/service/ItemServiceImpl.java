@@ -92,11 +92,13 @@ public class ItemServiceImpl implements ItemService {
         inventoryItemEntity.setDescription(itemRequestDTO.getDescription());
         inventoryItemEntity.setAvailableQuantity(itemRequestDTO.getAvailableQuantity());
         inventoryItemEntity.setImageURL(itemRequestDTO.getImageURL());
+        inventoryItemEntity.setUnit(itemRequestDTO.getUnit());
         itemRepository.save(inventoryItemEntity);
         return "Item is successfully updated";
     }
 
     public String deleteItem(int id) {
+        itemRepository.findById(id).get().setCategory(null);
         itemRepository.deleteById(id);
         return "Item is successfully deleted";
     }
