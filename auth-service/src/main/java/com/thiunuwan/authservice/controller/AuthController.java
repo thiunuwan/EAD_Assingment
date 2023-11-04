@@ -2,7 +2,6 @@ package com.thiunuwan.authservice.controller;
 
 
 import com.thiunuwan.authservice.dto.AuthRequest;
-
 import com.thiunuwan.authservice.entity.UserCredential;
 import com.thiunuwan.authservice.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +33,12 @@ public class AuthController {
             throw new RuntimeException("invalid access");
         }
     }
-
     @GetMapping("/validate")
     public String validateToken(@RequestParam("token") String token) {
         service.validateToken(token);
         return "Token is valid";
     }
+
+
+
 }
