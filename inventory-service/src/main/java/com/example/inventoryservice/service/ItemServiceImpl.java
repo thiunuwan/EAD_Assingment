@@ -62,6 +62,7 @@ public class ItemServiceImpl implements ItemService {
                                                                 .itemId(entity.getItemId())
                                                                 .description(entity.getDescription())
                                                                 .imageURL(entity.getImageURL())
+                                                                .unit(entity.getUnit())
                                                                 .build();
         return itemResponseDTO;
     }
