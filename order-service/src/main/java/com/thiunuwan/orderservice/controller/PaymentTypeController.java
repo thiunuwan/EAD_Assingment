@@ -8,6 +8,7 @@ import com.thiunuwan.orderservice.service.PaymentService;
 import com.thiunuwan.orderservice.service.PaymentTypeService;
 import org.springframework.aop.target.LazyInitTargetSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,13 +26,20 @@ public class PaymentTypeController {
     PaymentTypeService paymentTypeService;
 
     @PostMapping("/add-type")
-    public String savePaymentType(@RequestBody PaymentTypeDTO paymentTypeDTO){
-        return paymentTypeService.savePaymentType(paymentTypeDTO);
+    public ResponseEntity<String> savePaymentType(@RequestBody PaymentTypeDTO paymentTypeDTO){
+        String result = paymentTypeService.savePaymentType(paymentTypeDTO);
+        return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/types")
-    List<PaymentType> getAllPaymentTypes(){
-        return paymentTypeRepo.findAll();
+    @GetMapping("/get-types")
+    public ResponseEntity<List<PaymentTypeDTO>> getAllPaymentTypes(){
+        List<PaymentTypeDTO> paymentTypeDTOList = paymentTypeService.getAllPaymentTypes();
+        return ResponseEntity.ok(paymentTypeDTOList);
     }
+
+
+
+
+
 
 }
