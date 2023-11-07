@@ -34,4 +34,15 @@ public class PaymentTypeService {
         return  modelMapper.map(paymentTypeList, new TypeToken<ArrayList<PaymentTypeDTO>>(){
         }.getType());
     }
+
+    public String deletePaymentType(long typeId) {
+
+        if(paymentTypeRepo.existsById(typeId)){
+            paymentTypeRepo.deleteById(typeId);
+            return "Delete Sucessful";
+        }
+        else {
+            return "No matching data found";
+        }
+    }
 }

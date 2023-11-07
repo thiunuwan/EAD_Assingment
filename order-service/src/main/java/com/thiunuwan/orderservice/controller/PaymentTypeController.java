@@ -37,6 +37,12 @@ public class PaymentTypeController {
         return ResponseEntity.ok(paymentTypeDTOList);
     }
 
+    @DeleteMapping("/delete-type/{typeId}")
+    public ResponseEntity<String> deletePaymentType(@PathVariable long typeId){
+        String result = paymentTypeService.deletePaymentType(typeId);
+        return ResponseEntity.ok(result);
+    }
+
 
 
 
