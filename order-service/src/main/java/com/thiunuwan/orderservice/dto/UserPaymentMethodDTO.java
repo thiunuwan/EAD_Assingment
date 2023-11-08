@@ -17,7 +17,7 @@ import java.time.YearMonth;
 public class UserPaymentMethodDTO {
     private long id;
     private long user_id;
-    private PaymentType paymentType;
+    private long payment_type_id;
     private String account_num;
     private YearMonth expiry_date;
     private boolean is_default;
