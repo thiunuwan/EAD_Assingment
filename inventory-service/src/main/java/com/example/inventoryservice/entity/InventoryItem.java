@@ -15,6 +15,7 @@ public class InventoryItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int itemId;
+    @Column(unique = true)
     private String itemName;
     private String description;
     private String imageURL;

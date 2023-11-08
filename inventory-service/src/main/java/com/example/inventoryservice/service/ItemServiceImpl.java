@@ -103,4 +103,14 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.deleteById(id);
         return "Item is successfully deleted";
     }
+
+    @Override
+    public String updateItemQuantity(int id, int quantity) {
+
+        int availableQty = itemRepository.findById(id).get().getAvailableQuantity();
+        itemRepository.findById(id).get().setAvailableQuantity(availableQty+quantity);
+        itemRepository.deleteById(id);
+        return "Item Quantity(stock) is successfully updated";
+    }
+
 }
