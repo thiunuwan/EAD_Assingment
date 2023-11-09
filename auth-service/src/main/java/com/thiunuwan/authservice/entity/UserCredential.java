@@ -34,5 +34,7 @@ public class UserCredential {
     )
     private Set<Role> authorities;
 
+
+
 }
 
