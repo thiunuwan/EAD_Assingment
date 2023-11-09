@@ -21,6 +21,10 @@ public class UserCredential {
     private String username;
     private String email;
     private String password;
+    private String address;
+    private String contactNo;
+    private String firstName;
+    private String lastName;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

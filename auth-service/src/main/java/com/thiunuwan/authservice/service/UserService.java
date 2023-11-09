@@ -1,10 +1,12 @@
 package com.thiunuwan.authservice.service;
 
 import com.thiunuwan.authservice.dto.UserResponse;
+import com.thiunuwan.authservice.entity.UserCredential;
 import com.thiunuwan.authservice.repository.UserCredentialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,10 +16,49 @@ public class UserService {
 
 
     public UserResponse getUserDetailsByUsername(String username) {
-        return  null;
+        UserCredential userEntity=repository.findByUsername(username).get();
+        UserResponse userResponseDTO=UserResponse.builder()
+                .userId(userEntity.getUser_id())
+                .email(userEntity.getEmail())
+                .address(userEntity.getAddress())
+                .authorities(userEntity.getAuthorities())
+                .firstName(userEntity.getFirstName())
+                .lastName(userEntity.getLastName())
+                .contactNo(userEntity.getContactNo())
+                .build();
+        return  userResponseDTO;
     }
 
-    public List<UserResponse> getAllUsersByRole(String role) {
-        return  null;
+    public List<UserResponse> getAllUsersByRole(int roleId) {
+
+        List<UserCredential> userEntityList=repository.findAllByRole(roleId);
+        List<UserResponse> userResponseDTOList=new ArrayList<>();
+        for(UserCredential userEntity:userEntityList){
+            UserResponse userResponseDTO=UserResponse.builder()
+                    .userId(userEntity.getUser_id())
+                    .email(userEntity.getEmail())
+                    .address(userEntity.getAddress())
+                    .authorities(userEntity.getAuthorities())
+                    .firstName(userEntity.getFirstName())
+                    .lastName(userEntity.getLastName())
+                    .contactNo(userEntity.getContactNo())
+                    .build();
+            userResponseDTOList.add(userResponseDTO);
+        }
+        return userResponseDTOList;
+    }
+
+    public UserResponse setRoles(String username, int roleId) {
+        UserCredential userEntity=repository.findByUsername(username).get();
+        UserResponse userResponseDTO=UserResponse.builder()
+                .userId(userEntity.getUser_id())
+                .email(userEntity.getEmail())
+                .address(userEntity.getAddress())
+                .authorities(userEntity.getAuthorities())    //**********************************
+                .firstName(userEntity.getFirstName())
+                .lastName(userEntity.getLastName())
+                .contactNo(userEntity.getContactNo())
+                .build();
+        return  userResponseDTO;
     }
 }
