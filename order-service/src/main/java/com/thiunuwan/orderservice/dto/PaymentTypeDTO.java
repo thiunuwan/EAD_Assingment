@@ -1,0 +1,15 @@
+package com.thiunuwan.orderservice.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class PaymentTypeDTO {
+
+    private long id;
+    private String type;
+}
