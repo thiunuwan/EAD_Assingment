@@ -1,8 +1,8 @@
 package com.thiunuwan.orderservice.service;
 
 
-import com.thiunuwan.orderservice.dto.ShoppingCartItemsDTO;
-import com.thiunuwan.orderservice.dto.UserPaymentMethodDTO;
+import com.thiunuwan.orderservice.dto.ShoppingCartItemsResponseDTO;
+import com.thiunuwan.orderservice.dto.ShoppingCartItemsResquestDTO;
 import com.thiunuwan.orderservice.entity.ShoppingCart;
 import com.thiunuwan.orderservice.entity.ShoppingCartItems;
 import com.thiunuwan.orderservice.repository.ShoppingCartItemsRepo;
@@ -29,21 +29,23 @@ public class ShoppingCartItemsService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public String saveShoppingCartItem(ShoppingCartItemsDTO shoppingCartItemsDTO) {
+    public String saveShoppingCartItem(ShoppingCartItemsResquestDTO shoppingCartItemsResquestDTO) {
 
-        ShoppingCart mappedShoppingCart = shoppingCartRepo.findById(shoppingCartItemsDTO.getShopping_cart_id()).orElseThrow(()-> new RuntimeException("No matching SHopping Cart found."));
+        ShoppingCart mappedShoppingCart = shoppingCartRepo.findById(shoppingCartItemsResquestDTO.getShopping_cart_id()).orElseThrow(()-> new RuntimeException("No matching SHopping Cart found."));
 
         ShoppingCartItems newShoppingCartItem = new ShoppingCartItems();
 
         newShoppingCartItem.setShoppingCart(mappedShoppingCart);
-        newShoppingCartItem.setQty(shoppingCartItemsDTO.getQty());
+        newShoppingCartItem.setQty(shoppingCartItemsResquestDTO.getQty());
+
+        shoppingCartItemsRepo.save(newShoppingCartItem);
         return "Sucessfully added shopping cart item";
 
     }
 
-    public List<ShoppingCartItemsDTO> getAllShoppingCartItems(){
+    public List<ShoppingCartItemsResponseDTO> getAllShoppingCartItems(){
         List<ShoppingCartItems> shoppingCartItemsList = shoppingCartItemsRepo.findAll();
-        return modelMapper.map(shoppingCartItemsList, new TypeToken<ArrayList<ShoppingCartItemsDTO>>(){
+        return modelMapper.map(shoppingCartItemsList, new TypeToken<ArrayList<ShoppingCartItemsResponseDTO>>(){
         }.getType());
     }
 }

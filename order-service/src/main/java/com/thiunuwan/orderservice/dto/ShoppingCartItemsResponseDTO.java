@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ShoppingCartItemsDTO {
-
+public class ShoppingCartItemsResponseDTO {
     private Long id;
     private Long shopping_cart_id;
-//    private Long item_id;
+//        private Long item_id;
     private int qty;
-
 }

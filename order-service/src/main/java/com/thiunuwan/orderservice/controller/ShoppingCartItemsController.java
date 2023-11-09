@@ -1,8 +1,7 @@
 package com.thiunuwan.orderservice.controller;
 
 
-import com.thiunuwan.orderservice.dto.ShoppingCartItemsDTO;
-import com.thiunuwan.orderservice.repository.ShoppingCartItemsRepo;
+import com.thiunuwan.orderservice.dto.ShoppingCartItemsResquestDTO;
 import com.thiunuwan.orderservice.service.ShoppingCartItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +18,15 @@ public class ShoppingCartItemsController {
     private ShoppingCartItemsService shoppingCartItemsService;
 
     @PostMapping("/add-cart-item")
-    public ResponseEntity<String> addShoppingCartItem(@RequestBody ShoppingCartItemsDTO shoppingCartItemsDTO){
-        String result = shoppingCartItemsService.saveShoppingCartItem(shoppingCartItemsDTO);
+    public ResponseEntity<String> addShoppingCartItem(@RequestBody ShoppingCartItemsResquestDTO shoppingCartItemsResquestDTO){
+        String result = shoppingCartItemsService.saveShoppingCartItem(shoppingCartItemsResquestDTO);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/get-cart-items")
-    public ResponseEntity<List<ShoppingCartItemsDTO>> getAllShoppingCartItems(){
-        List<ShoppingCartItemsDTO> shoppingCartItemsDTOList = shoppingCartItemsService.getAllShoppingCartItems();
-        return ResponseEntity.ok(shoppingCartItemsDTOList);
+    public ResponseEntity<List<ShoppingCartItemsResquestDTO>> getAllShoppingCartItems(){
+        List<ShoppingCartItemsResquestDTO> shoppingCartItemsResquestDTOList = shoppingCartItemsService.getAllShoppingCartItems();
+        return ResponseEntity.ok(shoppingCartItemsResquestDTOList);
     }
 
 

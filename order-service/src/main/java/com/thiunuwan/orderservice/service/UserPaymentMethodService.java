@@ -1,8 +1,8 @@
 package com.thiunuwan.orderservice.service;
 
 
-import com.thiunuwan.orderservice.dto.PaymentTypeDTO;
-import com.thiunuwan.orderservice.dto.UserPaymentMethodDTO;
+import com.thiunuwan.orderservice.dto.UserPaymentMethodRequestDTO;
+import com.thiunuwan.orderservice.dto.UserPaymentMethodResponseDTO;
 import com.thiunuwan.orderservice.entity.PaymentType;
 import com.thiunuwan.orderservice.entity.UserPaymentMethod;
 import com.thiunuwan.orderservice.repository.PaymentTypeRepo;
@@ -29,28 +29,28 @@ public class UserPaymentMethodService {
     @Autowired
     private PaymentTypeRepo paymentTypeRepo;
 
-    public String saveUserPaymentMethod(UserPaymentMethodDTO userPaymentMethodDTO) {
+    public String saveUserPaymentMethod(UserPaymentMethodRequestDTO userPaymentMethodRequestDTO) {
 
-        PaymentType mappedPaymentType = paymentTypeRepo.findById(userPaymentMethodDTO.getPayment_type_id()).orElseThrow(()-> new RuntimeException("Payment Type not found"));
+        PaymentType mappedPaymentType = paymentTypeRepo.findById(userPaymentMethodRequestDTO.getPayment_type_id()).orElseThrow(()-> new RuntimeException("Payment Type not found"));
 
 //        userPaymentMethodRepo.save(modelMapper.map(userPaymentMethodDTO, UserPaymentMethod.class));
 
         UserPaymentMethod newUserPaymentMethod = new UserPaymentMethod();
 
-        newUserPaymentMethod.setUser_id(userPaymentMethodDTO.getUser_id());
+        newUserPaymentMethod.setUser_id(userPaymentMethodRequestDTO.getUser_id());
         newUserPaymentMethod.setPaymentType(mappedPaymentType);
-        newUserPaymentMethod.setAccount_num(userPaymentMethodDTO.getAccount_num());
-        newUserPaymentMethod.setExpiry_date(userPaymentMethodDTO.getExpiry_date());
-        newUserPaymentMethod.set_default(false);
+        newUserPaymentMethod.setAccount_num(userPaymentMethodRequestDTO.getAccount_num());
+        newUserPaymentMethod.setExpiry_date(userPaymentMethodRequestDTO.getExpiry_date());
+//        newUserPaymentMethod.set_default(false);
 
 
-//        userPaymentMethodRepo.save(newUserPaymentMethod);
+        userPaymentMethodRepo.save(newUserPaymentMethod);
         return "User Payment Method saved sucessfully";
     }
 
-    public List<UserPaymentMethodDTO> getAllUserPaymentMethods() {
+    public List<UserPaymentMethodResponseDTO> getAllUserPaymentMethods() {
         List<UserPaymentMethod> userPaymentMethodList= userPaymentMethodRepo.findAll();
-        return  modelMapper.map(userPaymentMethodList, new TypeToken<ArrayList<UserPaymentMethodDTO>>(){
+        return  modelMapper.map(userPaymentMethodList, new TypeToken<ArrayList<UserPaymentMethodResponseDTO>>(){
         }.getType());
     }
 }

@@ -1,10 +1,8 @@
 package com.thiunuwan.orderservice.controller;
 
 
-import com.thiunuwan.orderservice.dto.PaymentTypeDTO;
-import com.thiunuwan.orderservice.dto.UserPaymentMethodDTO;
-import com.thiunuwan.orderservice.entity.UserPaymentMethod;
-import com.thiunuwan.orderservice.repository.UserPaymentMethodRepo;
+import com.thiunuwan.orderservice.dto.UserPaymentMethodRequestDTO;
+import com.thiunuwan.orderservice.dto.UserPaymentMethodResponseDTO;
 import com.thiunuwan.orderservice.service.UserPaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +20,14 @@ public class UserPaymentMethodController {
     private UserPaymentMethodService userPaymentMethodService;
 
     @PostMapping("/save-payment-method")
-    public ResponseEntity<String> saveUserPaymentMethod(@RequestBody UserPaymentMethodDTO userPaymentMethodDTO){
-        String result = userPaymentMethodService.saveUserPaymentMethod(userPaymentMethodDTO);
+    public ResponseEntity<String> saveUserPaymentMethod(@RequestBody UserPaymentMethodRequestDTO userPaymentMethodRequestDTO){
+        String result = userPaymentMethodService.saveUserPaymentMethod(userPaymentMethodRequestDTO);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/get-payment-methods")
-    public ResponseEntity<List<UserPaymentMethodDTO>> getAllUSerPaymentMethods(){
-        List<UserPaymentMethodDTO> userPaymentMethodDTOList = userPaymentMethodService.getAllUserPaymentMethods();
-        return ResponseEntity.ok(userPaymentMethodDTOList);
+    public ResponseEntity<List<UserPaymentMethodResponseDTO>> getAllUSerPaymentMethods(){
+        List<UserPaymentMethodResponseDTO> userPaymentMethodResponseDTOList = userPaymentMethodService.getAllUserPaymentMethods();
+        return ResponseEntity.ok(userPaymentMethodResponseDTOList);
     }
 }
