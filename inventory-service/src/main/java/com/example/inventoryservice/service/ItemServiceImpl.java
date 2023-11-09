@@ -26,7 +26,8 @@ public class ItemServiceImpl implements ItemService {
     private CategoryRepository categoryRepository;
     public String addNewItem(ItemRequestDTO itemRequestDTO) {
 
-        Category category=categoryRepository.findById(itemRequestDTO.getCategoryId()).orElse(null);
+        Category category = categoryRepository.findById(itemRequestDTO.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found with ID: " + itemRequestDTO.getCategoryId()));
 
         InventoryItem newInventoryItem = InventoryItem.builder()
                 .itemName(itemRequestDTO.getItemName())
@@ -42,6 +43,9 @@ public class ItemServiceImpl implements ItemService {
     }
 
     public Page<ItemResponseDTO> getAllItems(Integer page, Integer size) {
+        if (page < 0 || size < 0) {
+            throw new IllegalArgumentException("Page and size should be non-negative");
+        }
         PageRequest pageable = PageRequest.of(page, size);
         Page<InventoryItem> pageEntities = itemRepository.findAll(pageable);
 
@@ -68,7 +72,9 @@ public class ItemServiceImpl implements ItemService {
     }
 
     public ItemResponseDTO getItemById(int id) {
-        InventoryItem inventoryItemEntity = itemRepository.findById(id).orElse(null);
+        InventoryItem inventoryItemEntity = itemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Inventory item not found with ID: " + id));
+
         ItemResponseDTO itemResponseDTO = ItemResponseDTO.builder()
                 .itemName(inventoryItemEntity.getItemName())
                 .category(inventoryItemEntity.getCategory())
@@ -84,9 +90,12 @@ public class ItemServiceImpl implements ItemService {
 
     public String updateItem(ItemRequestDTO itemRequestDTO, int id) {
 
-        Category category=categoryRepository.findById(itemRequestDTO.getCategoryId()).orElse(null);
+        Category category = categoryRepository.findById(itemRequestDTO.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Category not found with ID: " + itemRequestDTO.getCategoryId()));
 
-        InventoryItem inventoryItemEntity = itemRepository.findById(id).orElse(null);
+        InventoryItem inventoryItemEntity = itemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Inventory item not found with ID: " + id));
+
         inventoryItemEntity.setItemName(itemRequestDTO.getItemName());
         inventoryItemEntity.setCategory(category);
         inventoryItemEntity.setUnitPrice(itemRequestDTO.getUnitPrice());
@@ -99,8 +108,26 @@ public class ItemServiceImpl implements ItemService {
     }
 
     public String deleteItem(int id) {
-        itemRepository.findById(id).get().setCategory(null);
+        itemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Inventory item not found with ID: " + id));
         itemRepository.deleteById(id);
         return "Item is successfully deleted";
     }
+
+    @Override
+    public String updateItemQuantity(int id, int quantity) {
+
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity should not be negative");
+        }
+
+        InventoryItem inventoryItemEntity = itemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Inventory item not found with ID: " + id));
+
+        int availableQty = itemRepository.findById(id).get().getAvailableQuantity();
+        itemRepository.findById(id).get().setAvailableQuantity(availableQty+quantity);
+        itemRepository.deleteById(id);
+        return "Item Quantity(stock) is successfully updated";
+    }
+
 }

@@ -52,6 +52,12 @@ public class ItemController {
         return ResponseEntity.ok(result);
     }
 
+    @PutMapping("/update-item/stock/{id}/{quantity}")
+    public ResponseEntity<String> updateItemQuantity(@PathVariable(name = "id") int id,@PathVariable(name = "quantity") int quantity){
+        String result= itemServiceImpl.updateItemQuantity(id,quantity);
+        return ResponseEntity.ok(result);
+    }
+
 
 
 }

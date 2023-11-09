@@ -19,4 +19,5 @@ public interface ItemService {
     String deleteItem(int id);
 
 
+    String updateItemQuantity(int id, int quantity);
 }
