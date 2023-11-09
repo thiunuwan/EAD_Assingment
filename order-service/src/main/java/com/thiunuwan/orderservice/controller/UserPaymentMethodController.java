@@ -19,7 +19,7 @@ import java.util.List;
 public class UserPaymentMethodController {
 
     @Autowired
-    UserPaymentMethodService userPaymentMethodService;
+    private UserPaymentMethodService userPaymentMethodService;
 
     @PostMapping("/save-payment-method")
     public ResponseEntity<String> saveUserPaymentMethod(@RequestBody UserPaymentMethodDTO userPaymentMethodDTO){

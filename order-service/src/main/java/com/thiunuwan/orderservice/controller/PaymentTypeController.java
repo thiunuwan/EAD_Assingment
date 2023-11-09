@@ -20,10 +20,10 @@ import java.util.List;
 public class PaymentTypeController {
 
     @Autowired
-    PaymentTypeRepo paymentTypeRepo;
+    private PaymentTypeRepo paymentTypeRepo;
 
     @Autowired
-    PaymentTypeService paymentTypeService;
+    private PaymentTypeService paymentTypeService;
 
     @PostMapping("/add-type")
     public ResponseEntity<String> savePaymentType(@RequestBody PaymentTypeDTO paymentTypeDTO){

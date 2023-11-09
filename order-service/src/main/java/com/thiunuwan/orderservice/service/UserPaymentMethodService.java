@@ -31,7 +31,7 @@ public class UserPaymentMethodService {
 
     public String saveUserPaymentMethod(UserPaymentMethodDTO userPaymentMethodDTO) {
 
-        PaymentType mappedPaymentType = paymentTypeRepo.findById(userPaymentMethodDTO.getPayment_type_id()).orElseThrow(()-> new RuntimeException("Payyment Type not found"));
+        PaymentType mappedPaymentType = paymentTypeRepo.findById(userPaymentMethodDTO.getPayment_type_id()).orElseThrow(()-> new RuntimeException("Payment Type not found"));
 
 //        userPaymentMethodRepo.save(modelMapper.map(userPaymentMethodDTO, UserPaymentMethod.class));
 

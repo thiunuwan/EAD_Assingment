@@ -4,6 +4,7 @@ package com.thiunuwan.orderservice.controller;
 import com.thiunuwan.orderservice.dto.PaymentRequestDTO;
 import com.thiunuwan.orderservice.dto.PaymentResponseDTO;
 import com.thiunuwan.orderservice.service.PaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 public class PaymentController {
 
-    private final PaymentService paymentService;
+    @Autowired
+    private PaymentService paymentService;
 
     public PaymentController(PaymentService paymentService) {
         this.paymentService = paymentService;

@@ -21,9 +21,9 @@ public class UserPaymentMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "method_id")
-    private long id;
+    private Long id;
 
-    private long user_id;
+    private Long user_id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_type_id", referencedColumnName = "payment_type_id")
@@ -31,7 +31,7 @@ public class UserPaymentMethod {
 
     private String account_num;
     private YearMonth expiry_date;
-    private boolean is_default;
+    private Boolean is_default;
 
 }
 
