@@ -2,6 +2,7 @@ package com.thiunuwan.authservice.controller;
 
 
 import com.thiunuwan.authservice.dto.AuthRequest;
+import com.thiunuwan.authservice.dto.UserResponse;
 import com.thiunuwan.authservice.entity.UserCredential;
 import com.thiunuwan.authservice.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class AuthController {
     public String addNewUser(@RequestBody UserCredential user) {
         return service.saveUser(user);
     }
+
 
     @PostMapping("/token")
     public String getToken(@RequestBody AuthRequest authRequest) {
