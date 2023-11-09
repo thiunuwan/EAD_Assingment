@@ -1,6 +1,7 @@
 package com.thiunuwan.orderservice.controller;
 
 
+import com.thiunuwan.orderservice.dto.ShoppingCartItemsResponseDTO;
 import com.thiunuwan.orderservice.dto.ShoppingCartItemsResquestDTO;
 import com.thiunuwan.orderservice.service.ShoppingCartItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,9 @@ public class ShoppingCartItemsController {
     }
 
     @GetMapping("/get-cart-items")
-    public ResponseEntity<List<ShoppingCartItemsResquestDTO>> getAllShoppingCartItems(){
-        List<ShoppingCartItemsResquestDTO> shoppingCartItemsResquestDTOList = shoppingCartItemsService.getAllShoppingCartItems();
-        return ResponseEntity.ok(shoppingCartItemsResquestDTOList);
+    public ResponseEntity<List<ShoppingCartItemsResponseDTO>> getAllShoppingCartItems(){
+        List<ShoppingCartItemsResponseDTO> shoppingCartItemsResponseDTOList = shoppingCartItemsService.getAllShoppingCartItems();
+        return ResponseEntity.ok(shoppingCartItemsResponseDTOList);
     }
 
 
