@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = {"*"})
 @RequestMapping("/auth/user")
 public class UserController {
 
@@ -16,18 +17,18 @@ public class UserController {
     private UserService userService;
 
 
-    @GetMapping("/user/{username}")
+    @GetMapping("/{username}")
     public UserResponse getUserDetails(@PathVariable String username) {
         return userService.getUserDetailsByUsername(username);
     }
 
-    @GetMapping("/user/usersByRole/{roleId}")
+    @GetMapping("/usersByRole/{roleId}")
     public List<UserResponse> getAllUsersByRole(@PathVariable int roleId) {
         return userService.getAllUsersByRole(roleId);
     }
 
 
-    @PutMapping("/user/{username}/set-role/{roleId}")
+    @PutMapping("/{username}/set-role/{roleId}")
     public UserResponse setRoles(@PathVariable String username,@PathVariable int roleId) {
 
         return userService.setRoles(username,roleId);
