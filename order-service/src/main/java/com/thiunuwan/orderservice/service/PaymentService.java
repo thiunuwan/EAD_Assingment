@@ -2,18 +2,18 @@ package com.thiunuwan.orderservice.service;
 
 
 import com.thiunuwan.orderservice.client.InventoryClient;
-import com.thiunuwan.orderservice.dto.DeductItemsResponseDTO;
-import com.thiunuwan.orderservice.dto.PaymentRequestDTO;
-import com.thiunuwan.orderservice.dto.PaymentResponseDTO;
+import com.thiunuwan.orderservice.dto.*;
+import com.thiunuwan.orderservice.repository.ShopOrderRepository;
+import com.thiunuwan.orderservice.repository.ShoppingCartItemsRepo;
 import com.thiunuwan.orderservice.repository.ShoppingCartRepo;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -26,6 +26,18 @@ public class PaymentService {
     private ShoppingCartService shoppingCartService;
     @Autowired
     private ShoppingCartRepo shoppingCartRepo;
+
+    @Autowired
+    private ShopOrderServiceImpl shopOrderServiceImpl;
+
+    @Autowired
+    private ShopOrderRepository shopOrderRepository;
+
+    @Autowired
+    private ShoppingCartItemsService shoppingCartItemsService;
+
+    @Autowired
+    private OrderLineService orderLineService;
 
 
 
@@ -60,8 +72,32 @@ public class PaymentService {
 
     }
 
-    public int isPaymentSuccessful(int code,int userId){
+    public int isPaymentSuccessful(int code,int userId,String shippingAddress){
         if(code==200){
+
+            //create order
+            ShopOrderRequestDTO orderRequestDTO=new ShopOrderRequestDTO();
+            orderRequestDTO.setUserId(userId);
+            orderRequestDTO.setOrderDateTime(LocalDateTime.now());
+            orderRequestDTO.setShippingAddress(shippingAddress);
+            orderRequestDTO.setOrderStatus("processing");
+            orderRequestDTO.setOrderTotal(shoppingCartRepo.findByUserId(userId).getTotal());
+
+            Long orderId=shopOrderServiceImpl.createOrder(orderRequestDTO);
+
+            //create order-lines
+            Long cartId = shoppingCartRepo.findByUserId(userId).getId();
+
+            List<ShoppingCartItemsResponseDTO> shoppingCartItemsList =shoppingCartItemsService.getShoppingCartItemsByCartId(cartId);
+
+            for (ShoppingCartItemsResponseDTO item: shoppingCartItemsList) {
+                OrderLineRequestDTO requestDTO = new OrderLineRequestDTO();
+                requestDTO.setInventoryItemId(item.getItem());
+                requestDTO.setQuantity(item.getQty());
+                requestDTO.setOrderId(orderId);
+                requestDTO.setSubTotal(item.getPrice()* item.getQty());
+                orderLineService.addOrderLine(requestDTO);
+            }
 
             //deduct the item qts from inventory micro service
             List<DeductItemsResponseDTO> deductItemList=shoppingCartService.getDeductItemListByUserId(userId);

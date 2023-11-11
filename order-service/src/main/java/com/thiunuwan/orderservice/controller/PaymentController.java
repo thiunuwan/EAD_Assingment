@@ -4,6 +4,7 @@ package com.thiunuwan.orderservice.controller;
 import com.thiunuwan.orderservice.dto.DeductItemsResponseDTO;
 import com.thiunuwan.orderservice.dto.PaymentRequestDTO;
 import com.thiunuwan.orderservice.dto.PaymentResponseDTO;
+import com.thiunuwan.orderservice.dto.ShippingAddressRequestDTO;
 import com.thiunuwan.orderservice.service.PaymentService;
 import com.thiunuwan.orderservice.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,8 @@ public class PaymentController {
     }
 
     @PostMapping("/isPaymentSuccessful/{code}/{userId}")
-    public ResponseEntity<Integer> isPaymentSuccessful(@PathVariable int code,@PathVariable int userId){
-        return ResponseEntity.ok(paymentService.isPaymentSuccessful(code,userId));
+    public ResponseEntity<Integer> isPaymentSuccessful(@PathVariable int code,@PathVariable int userId,@RequestBody ShippingAddressRequestDTO shippingAddressRequestDTO){
+        return ResponseEntity.ok(paymentService.isPaymentSuccessful(code,userId, shippingAddressRequestDTO.getShippingAddress()));
     }
 
 

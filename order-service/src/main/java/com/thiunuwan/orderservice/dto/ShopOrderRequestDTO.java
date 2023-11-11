@@ -3,8 +3,8 @@ package com.thiunuwan.orderservice.dto;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Data
 @Getter
 @Setter
@@ -13,10 +13,10 @@ import java.time.LocalDate;
 @Builder
 @Component
 public class ShopOrderRequestDTO {
-    private Long userId;
-    private LocalDate orderDate;
-    private Long paymentId;
+    private int userId;
+    private LocalDateTime orderDateTime;
+//    private Long paymentId;
     private String shippingAddress;
-    private BigDecimal orderTotal;
+    private double orderTotal;
     private String orderStatus;
 }

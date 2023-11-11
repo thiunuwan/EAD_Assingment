@@ -11,6 +11,6 @@ public class ShoppingCartItemsResquestDTO {
 
     private Integer item_id;
     private Integer qty;
-    private Double price;
+    private double price;
 
 }

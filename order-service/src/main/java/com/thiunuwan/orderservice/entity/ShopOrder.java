@@ -3,8 +3,7 @@ package com.thiunuwan.orderservice.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -21,9 +20,10 @@ public class ShopOrder {
 //    @ManyToOne
 //    @JoinColumn(name = "user_id")
 //    private User user;
+    private int userId;
 
     @Column(name = "order_date")
-    private LocalDate orderDate;
+    private LocalDateTime orderDateTime;
 
 //    @OneToOne
 //    @JoinColumn(name = "payment_id")
@@ -33,7 +33,7 @@ public class ShopOrder {
     private String shippingAddress;
 
     @Column(name = "order_total")
-    private BigDecimal orderTotal;
+    private double orderTotal;
 
     @JoinColumn(name = "order_status")
     private String orderStatus;
