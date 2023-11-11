@@ -28,8 +28,6 @@ The SMS is accessible through any computer or mobile device with internet connec
 
 ## Benefits
 
-The Supermarket Management System offers the following benefits:
-
 #Improved operational efficiency.
 #Enhanced customer satisfaction through seamless order processing.
 #Optimized inventory management for better stock control.
