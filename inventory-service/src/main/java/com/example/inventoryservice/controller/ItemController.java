@@ -1,5 +1,6 @@
 package com.example.inventoryservice.controller;
 
+import com.example.inventoryservice.dto.DeductItemsRequestDTO;
 import com.example.inventoryservice.dto.ItemRequestDTO;
 import com.example.inventoryservice.dto.ItemResponseDTO;
 import com.example.inventoryservice.service.ItemServiceImpl;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController()
@@ -59,5 +61,9 @@ public class ItemController {
     }
 
 
-
+    @PutMapping("/update-item/stock/by-deduct-item-list")
+    public ResponseEntity<String> updateItemQuantitiesByDeductItemList(@RequestBody List<DeductItemsRequestDTO> deductItemsRequestDTO){
+        String result= itemServiceImpl.updateItemQuantityByDeductItemList(deductItemsRequestDTO);
+        return ResponseEntity.ok(result);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.inventoryservice.service;
 
 
+import com.example.inventoryservice.dto.DeductItemsRequestDTO;
 import com.example.inventoryservice.dto.ItemRequestDTO;
 import com.example.inventoryservice.dto.ItemResponseDTO;
 import com.example.inventoryservice.entity.Category;
@@ -130,4 +131,12 @@ public class ItemServiceImpl implements ItemService {
         return "Item Quantity(stock) is successfully updated";
     }
 
+    public String updateItemQuantityByDeductItemList(List<DeductItemsRequestDTO> deductItemsRequestDTOList) {
+        for (DeductItemsRequestDTO dil:deductItemsRequestDTOList) {
+           InventoryItem inventoryItem= itemRepository.findById(dil.getItemId()).get();
+            inventoryItem.setAvailableQuantity(inventoryItem.getAvailableQuantity()-dil.getPurchaseQty());
+            itemRepository.save(inventoryItem);
+        }
+        return "update successful";
+    }
 }

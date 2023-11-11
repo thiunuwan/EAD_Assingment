@@ -1,12 +1,16 @@
 package com.thiunuwan.orderservice.controller;
 
 
+import com.thiunuwan.orderservice.dto.DeductItemsResponseDTO;
 import com.thiunuwan.orderservice.dto.PaymentRequestDTO;
 import com.thiunuwan.orderservice.dto.PaymentResponseDTO;
 import com.thiunuwan.orderservice.service.PaymentService;
+import com.thiunuwan.orderservice.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/v1/payment")
@@ -15,6 +19,7 @@ public class PaymentController {
 
     @Autowired
     private PaymentService paymentService;
+
 
     public PaymentController(PaymentService paymentService) {
         this.paymentService = paymentService;
@@ -30,5 +35,12 @@ public class PaymentController {
     public ResponseEntity<Integer> isPaymentSuccessful(@PathVariable int code,@PathVariable int userId){
         return ResponseEntity.ok(paymentService.isPaymentSuccessful(code,userId));
     }
+
+
+
+
+
+
+
 
 }
