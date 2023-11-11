@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 public class OrderLineResponseDTO {
     private Long id;
     private ShopOrder order;
-    private InventoryItem inventoryItem;
+//    private InventoryItem inventoryItem;
     private BigDecimal quantity;
     private BigDecimal totalPrice;
 }

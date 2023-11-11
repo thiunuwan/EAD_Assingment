@@ -26,4 +26,9 @@ public class PaymentController {
         return ResponseEntity.ok(responseDTO);
     }
 
+    @PostMapping("/isPaymentSuccessful/{code}/{userId}")
+    public ResponseEntity<Integer> isPaymentSuccessful(@PathVariable int code,@PathVariable int userId){
+        return ResponseEntity.ok(paymentService.isPaymentSuccessful(code,userId));
+    }
+
 }

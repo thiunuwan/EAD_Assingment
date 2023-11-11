@@ -18,7 +18,7 @@ public class StripeService {
         Stripe.apiKey="sk_test_51NHa3qSHQTfZ29uMx21oWuZHx3WP2bZ5mNjuWioXr1ShiGjeKCAypZ7KBvMdm87v6BAo65Jmda8YGzeVM07rNgkP00Iav4poZM";
     }
 
-    public PaymentIntent createPaymentIntent(long amount) throws StripeException {
+    public PaymentIntent createPaymentIntent(double amount) throws StripeException {
         return PaymentIntent.create(new HashMap<String, Object>() {{
             put("amount", Math.round(amount * 100));
             put("currency", "INR");

@@ -10,6 +10,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "inventory_item")
 public class InventoryItem {
 
     @Id
@@ -24,7 +25,7 @@ public class InventoryItem {
     @Enumerated(EnumType.STRING)
     private  Unit unit;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "category-id")
     private Category category;
 

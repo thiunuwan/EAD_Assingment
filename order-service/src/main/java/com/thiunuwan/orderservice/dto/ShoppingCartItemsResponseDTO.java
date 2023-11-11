@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class ShoppingCartItemsResponseDTO {
     private Long id;
     private ShoppingCart shoppingCart;
-//        private set<Item> item;
     private Integer qty;
+    private double price;
+    private double subTotal;
 }

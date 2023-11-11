@@ -3,15 +3,13 @@ package com.thiunuwan.orderservice.service;
 
 import com.thiunuwan.orderservice.dto.PaymentRequestDTO;
 import com.thiunuwan.orderservice.dto.PaymentResponseDTO;
+import com.thiunuwan.orderservice.repository.ShoppingCartRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
-import org.springframework.stereotype.Service;
-
-import static java.util.Objects.isNull;
 
 import static java.util.Objects.isNull;
 
@@ -19,6 +17,10 @@ import static java.util.Objects.isNull;
 @Transactional
 public class PaymentService {
 
+    @Autowired
+    private ShoppingCartService shoppingCartService;
+    @Autowired
+    private ShoppingCartRepo shoppingCartRepo;
 
     private final StripeService stripeService;
 
@@ -29,9 +31,10 @@ public class PaymentService {
     public PaymentResponseDTO initiatePayment(PaymentRequestDTO PaymentRequestDTO) {
         PaymentResponseDTO responseDTO = new PaymentResponseDTO();
         try {
-            long amount = PaymentRequestDTO.getAmount();
+            double amount=shoppingCartRepo.findById(PaymentRequestDTO.getCartId()).get().getTotal();
+//            long amount = PaymentRequestDTO.getAmount();
             if (amount == 0 || isNull(amount)) {
-                responseDTO.setMessage("Please enter a amount");
+                responseDTO.setMessage("Cart is empty");
                 return responseDTO;
             }
             PaymentIntent paymentIntent = stripeService.createPaymentIntent(amount);
@@ -44,4 +47,14 @@ public class PaymentService {
         return responseDTO;
 
     }
+
+    public int isPaymentSuccessful(int code,int userId){
+        if(code==200){
+
+            shoppingCartService.deleteShoppingCartByUserId(userId);
+            return code;
+        }
+        return -1;
+    }
+
 }

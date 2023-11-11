@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class ShoppingCartItemsResquestDTO {
 
-    private Long id;
-    private Long shopping_cart_id;
-//    private Long item_id;
+    private Integer item_id;
     private Integer qty;
+    private Double price;
 
 }

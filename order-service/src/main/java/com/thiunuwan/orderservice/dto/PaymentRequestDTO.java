@@ -12,5 +12,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Getter
 @Setter
 public class PaymentRequestDTO {
-    private long amount;
+    private long cartId;
 }

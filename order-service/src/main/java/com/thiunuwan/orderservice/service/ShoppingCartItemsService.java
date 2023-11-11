@@ -29,16 +29,36 @@ public class ShoppingCartItemsService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public String saveShoppingCartItem(ShoppingCartItemsResquestDTO shoppingCartItemsResquestDTO) {
+    @Autowired
+    private ShoppingCartService shoppingCartService;
 
-        ShoppingCart mappedShoppingCart = shoppingCartRepo.findById(shoppingCartItemsResquestDTO.getShopping_cart_id()).orElseThrow(()-> new RuntimeException("No matching SHopping Cart found."));
+    public String saveShoppingCartItem(ShoppingCartItemsResquestDTO shoppingCartItemsResquestDTO, int userId) {
+        ShoppingCart shoppingCart;
+
+
+
+       if(shoppingCartRepo.findByUserId(userId)!=null) {
+            shoppingCart = shoppingCartRepo.findByUserId(userId);
+       }
+       else {
+            shoppingCart=new ShoppingCart();
+           shoppingCart.setUserId(userId);
+       }
+
 
         ShoppingCartItems newShoppingCartItem = new ShoppingCartItems();
 
-        newShoppingCartItem.setShoppingCart(mappedShoppingCart);
+        newShoppingCartItem.setShoppingCart(shoppingCart);
         newShoppingCartItem.setQty(shoppingCartItemsResquestDTO.getQty());
+        newShoppingCartItem.setItem(shoppingCartItemsResquestDTO.getItem_id());
+        newShoppingCartItem.setPrice(shoppingCartItemsResquestDTO.getPrice());
+
+        newShoppingCartItem.setSubTotal(shoppingCartItemsResquestDTO.getPrice()*shoppingCartItemsResquestDTO.getQty());
+
 
         shoppingCartItemsRepo.save(newShoppingCartItem);
+        shoppingCartService.updateTotal(shoppingCart.getId(), shoppingCartItemsResquestDTO.getPrice()*shoppingCartItemsResquestDTO.getQty());
+
         return "Sucessfully added shopping cart item";
 
     }
@@ -48,4 +68,12 @@ public class ShoppingCartItemsService {
         return modelMapper.map(shoppingCartItemsList, new TypeToken<ArrayList<ShoppingCartItemsResponseDTO>>(){
         }.getType());
     }
+
+    public List<ShoppingCartItemsResponseDTO> getShoppingCartItemsByCartId(Long shopping_cart_id) {
+        List<ShoppingCartItems> shoppingCartItemsList = shoppingCartItemsRepo.findByShopping_cart_id(shopping_cart_id);
+        return modelMapper.map(shoppingCartItemsList, new TypeToken<ArrayList<ShoppingCartItemsResponseDTO>>(){
+        }.getType());
+    }
+
+
 }

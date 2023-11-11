@@ -19,13 +19,15 @@ public class ShoppingCartItems {
     @Column(name = "cart_item_id")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "shopping_cart_id", referencedColumnName = "shopping_cart_id")
     private ShoppingCart shoppingCart;
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "item_id")
 //    private Item item;
-
+    private int item;
     private Integer qty;
+    private double price;
+    private double subTotal;
 }

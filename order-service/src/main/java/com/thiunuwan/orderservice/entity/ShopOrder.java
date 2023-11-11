@@ -18,16 +18,16 @@ public class ShopOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
 
     @Column(name = "order_date")
     private LocalDate orderDate;
 
-    @OneToOne
-    @JoinColumn(name = "payment_id")
-    private Payment payment;
+//    @OneToOne
+//    @JoinColumn(name = "payment_id")
+//    private Payment payment;
 
     @JoinColumn(name = "shipping_address")
     private String shippingAddress;

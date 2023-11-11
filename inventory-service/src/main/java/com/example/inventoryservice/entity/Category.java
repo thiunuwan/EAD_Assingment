@@ -1,10 +1,10 @@
 package com.example.inventoryservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -20,5 +20,8 @@ public class Category {
     private int categoryId;
     private String name;
     private String description;
+
+    @OneToMany(cascade = CascadeType.REMOVE,mappedBy = "category")
+    private List<InventoryItem> items=new ArrayList<>();
 
 }
