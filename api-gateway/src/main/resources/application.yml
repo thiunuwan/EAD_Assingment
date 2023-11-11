@@ -30,6 +30,12 @@ spring:
             filters:
               - AuthenticationFilter
 
+          - id: delivery-service
+            uri: http://localhost:8093
+            predicates:
+              - Path=/delivery/**
+            filters:
+              - AuthenticationFilter
 
   config:
     import: optional:configserver:http://localhost:8888

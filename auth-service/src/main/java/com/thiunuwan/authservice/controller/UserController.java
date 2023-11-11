@@ -1,6 +1,7 @@
 package com.thiunuwan.authservice.controller;
 
 import com.thiunuwan.authservice.dto.UserResponse;
+import com.thiunuwan.authservice.dto.UserResponseDelivery;
 import com.thiunuwan.authservice.entity.UserCredential;
 import com.thiunuwan.authservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,11 @@ public class UserController {
     @GetMapping("/user/{username}")
     public UserResponse getUserDetails(@PathVariable String username) {
         return userService.getUserDetailsByUsername(username);
+    }
+
+    @GetMapping("/userById/{id}")
+    public UserResponseDelivery getUserDetails(@PathVariable int id) {
+        return userService.getUserDetailsByUserId(id);
     }
 
     @GetMapping("/user/usersByRole/{roleId}")

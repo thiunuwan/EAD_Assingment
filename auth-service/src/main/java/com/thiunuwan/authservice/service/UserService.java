@@ -1,6 +1,7 @@
 package com.thiunuwan.authservice.service;
 
 import com.thiunuwan.authservice.dto.UserResponse;
+import com.thiunuwan.authservice.dto.UserResponseDelivery;
 import com.thiunuwan.authservice.entity.Role;
 import com.thiunuwan.authservice.entity.UserCredential;
 import com.thiunuwan.authservice.repository.RoleRepository;
@@ -74,5 +75,19 @@ public class UserService {
                 .contactNo(userEntity.getContactNo())
                 .build();
         return  userResponseDTO;
+    }
+
+    public UserResponseDelivery getUserDetailsByUserId(int id) {
+        UserCredential userCredential=repository.findById(id).get();
+        UserResponseDelivery userResponseDelivery=UserResponseDelivery.builder().userId(userCredential.getUser_id())
+                .username(userCredential.getUsername())
+                .address(userCredential.getAddress())
+                .firstName(userCredential.getFirstName())
+                .lastName(userCredential.getLastName())
+                .contactNo(userCredential.getContactNo())
+                .email(userCredential.getEmail())
+                .build();
+
+        return userResponseDelivery;
     }
 }
