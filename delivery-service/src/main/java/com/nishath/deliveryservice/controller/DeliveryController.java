@@ -18,5 +18,11 @@ public class DeliveryController {
         return ResponseEntity.ok(result);
     }
 
+    @PutMapping("/set-delivery-status/{deliveryId}/{status}")
+    public ResponseEntity<String> setStatus(@PathVariable int deliveryId, @PathVariable String status){
+        String result= deliveryService.setStatus(deliveryId,status);
+        return ResponseEntity.ok(result);
+    }
+
 
 }

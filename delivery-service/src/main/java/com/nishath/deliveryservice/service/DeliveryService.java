@@ -35,13 +35,19 @@ public class DeliveryService {
         deliveryEntity.setDeliveryPersonContactNo(userResponseDelivery.getContactNo());
         deliveryEntity.setUserId(orderResponseDTO.getUser());
         deliveryEntity.setShippingAddress(orderResponseDTO.getShippingAddress());
-//
-
+        deliveryEntity.setDeliveryStatus("delivery-person assigned");
         UserResponseDelivery userResponseDelivery2=authClient.getUserDetails(orderResponseDTO.getUser());
         System.out.println(userResponseDelivery2);
 
         deliveryEntity.setUserContactNo(userResponseDelivery2.getContactNo());
         deliveryRepository.save(deliveryEntity);
         return "delivery person successfully assigned ";
+    }
+
+    public String setStatus(int deliveryId, String status) {
+         DeliveryEntity entity=deliveryRepository.findById(deliveryId).get();
+         entity.setDeliveryStatus(status);
+         deliveryRepository.save(entity);
+         return "change status sucess";
     }
 }

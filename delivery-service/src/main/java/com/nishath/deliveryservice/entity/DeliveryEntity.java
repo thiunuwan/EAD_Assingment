@@ -26,5 +26,5 @@ public class DeliveryEntity {
     private int deliveryPersonId;
     private String userContactNo;
     private String deliveryPersonContactNo;
-
+    private String deliveryStatus;
 }
