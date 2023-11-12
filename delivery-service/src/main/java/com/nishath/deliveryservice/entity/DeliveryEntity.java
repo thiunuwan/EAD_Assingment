@@ -21,11 +21,10 @@ public class DeliveryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String ShippingAddress;
-    private int orderId;
+    private long orderId;
     private int userId;
     private int deliveryPersonId;
     private String userContactNo;
     private String deliveryPersonContactNo;
-
 
 }
