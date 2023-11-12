@@ -3,6 +3,7 @@ package com.example.inventoryservice;
 import com.example.inventoryservice.entity.Category;
 import com.example.inventoryservice.entity.InventoryItem;
 import com.example.inventoryservice.entity.Unit;
+import com.example.inventoryservice.repository.CategoryRepository;
 import com.example.inventoryservice.repository.ItemRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,14 +21,15 @@ public class InventoryServiceApplication {
 
 	//add defaults items to inventory_db
 	@Bean
-	CommandLineRunner run(ItemRepository itemRepository){
+	CommandLineRunner run(ItemRepository itemRepository, CategoryRepository categoryRepository){
 		return args ->{
 
 			if(itemRepository.existsById(1))return;
 
 			Category category1=new Category();
-			category1.setName("electronic");
-			category1.setDescription("Biscuits");
+			category1.setName("snacks");
+			category1.setDescription("snacks desc");
+			categoryRepository.save(category1);
 
 			itemRepository.save(new InventoryItem(1,  "tikiri mari","Biscuits", "https://example.com/oreo.jpg", 60, 7.4, Unit.EACH,category1));
 			itemRepository.save(new InventoryItem(5, "cheese-bits","Biscuits", "https://example.com/shortbread.jpg", 35, 3.49,Unit.EACH,category1));
