@@ -25,6 +25,7 @@ public class UserService {
     public UserResponse getUserDetailsByUsername(String username) {
         UserCredential userEntity=repository.findByUsername(username).get();
         UserResponse userResponseDTO=UserResponse.builder()
+                .username(userEntity.getUsername())
                 .userId(userEntity.getUser_id())
                 .email(userEntity.getEmail())
                 .address(userEntity.getAddress())
