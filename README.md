@@ -36,3 +36,8 @@ The SMS is accessible through any computer or mobile device with internet connec
 ## Maintenance
 
 The SMS is designed to be modular and easy to maintain. Regularly check for updates and improvements in the repository.
+=======
+EAD microservices assignment
+
+System for a supermarket using Spring Boot 
+
