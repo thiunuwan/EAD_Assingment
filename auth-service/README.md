@@ -1,0 +1,1 @@
+Authenticaion module is responsible for customer registration, authentication and profile management. customers interact with this module through the user interface to register or log into the system and manage their profiles. every user who is logging to the system must go through this module for security purposes. 
